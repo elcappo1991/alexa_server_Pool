@@ -6,8 +6,8 @@ var list =['living room','arpegio']
 
 /* GET home page. */
 router.get('/',function(req, res, next) {
-console.log('fn recalled')
-res.send('GET')
+var tab=['arpegio','living room']
+res.json({list:tab})
 
 
 
@@ -24,6 +24,12 @@ res.send('found')
 	}
 	
 })
+router.post('/playnext',function(req,res,next){
+      console.log(req.body.key)	
+     console.log('play next')
+	res.send({status:'ok'})
+})
+
 //get the home page function
 
 
