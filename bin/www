@@ -39,12 +39,17 @@ server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
-var io=require('socket.io').listen(server);
-var clients=[]
-io.sockets.on('connection',function(socket){
-console.log('Un clisnt est connecte',socket.id)
 
+/*var io=require('socket.io').listen(server);
+var clients=[]
+
+io.sockets.on('connection',function(socket){
+  console.log('Un clisnt est connecte',socket.id)
   clients.push(socket);
+  socket.on('data', function (data) {
+        console.log(data.toString());
+  });
+  
   socket.on('disconnect',function(){
     var index = clients.indexOf(socket);
     if(index != -1 ){
@@ -57,15 +62,71 @@ console.log('Un clisnt est connecte',socket.id)
 
 })
 
-setInterval(function(){
+*/
+
+
+var clients=[]
+require('net').createServer(function (socket) {
+    console.log("connected");
+    
+
+
+    socket.on('data', function (data) {
+      socket.name=data.toString()
+
+      clients.push(socket);
+      socket.write('connected to server')
+        console.log(data.toString()); 
+    });
+
+
+
+    socket.on('close',function(){
+        var index = clients.indexOf(socket);
+        if(index != -1 ){
+        clients.splice(index,1);
+        console.log('client close');
+       }
+    });
+
+    var sendSocketToSpeaker=function(name,callback){
+        console.log('inside function')
+       
+        clients.forEach(function(client){
+          if (client.name==name){
+                callback(client.write('play_next'))
+              }else {
+               callback(false)
+            }
+
+            })
+
+    }
+exports.sendSocketToSpeaker=sendSocketToSpeaker;
+
+    
+
+}).listen(7070,function(){
+
+  console.log('listen on port 7070')
+});
+
+
+
+
+    /* setInterval(function(){
+ 
+
 var randomClient;
 if(clients.length > 0){
   randomClient= Math.floor(Math.random() * clients.length);
-	clients[randomClient].emit('foo',clients.length); 
+  clients[1].write('foo'); 
 
 }
 
-},6000)
+},6000)*/
+
+exports.clients = clients;
 
 /**
  * Normalize a port into a number, string, or false.
@@ -121,6 +182,7 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
+  console.log('server http listening on 5050')
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;

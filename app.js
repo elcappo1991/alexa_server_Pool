@@ -87,7 +87,7 @@ app.use('/users', users);
 app.use(function(req, res, next) {
 
   res.locals.user = null;
-  res.render('error');
+  res.send('error');
 
 });
 
@@ -100,7 +100,7 @@ if (app.get('env') === 'development') {
     res.status(err.status || 500);
 
     res.locals.user = null;
-    res.render('error');
+    res.send('error');
   });
 }
 
@@ -110,7 +110,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
 
   res.locals.user = null;
-  res.render('error');
+  res.send('error');
 });
 
 /*
