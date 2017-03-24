@@ -25,15 +25,17 @@ router.post('/',function(req,res,next){
 	
 	fn.clients.forEach(function(soc){
 		if (soc.name == req.body.key){
+			console.log('theire is a socket named as requested')
 			soc.linked=true
-			res.send('found')
+			
 		}else {
+
 			soc.linked=false
 		}
 		
 	})
+	res.send('treated post')
 	
-	res.send('end request')
 
 	
 })
@@ -41,7 +43,7 @@ router.post('/playnext',function(req,res,next){
       console.log(req.body.key)	
       if(! req.body.key){
       	fn.clients.forEach(function(soc){
-		if (soc.linked = true){
+		if (soc.linked === true){
 
 			 fn.sendSocketToSpeaker(soc.name,function(res){
 		      	console.log('done')
