@@ -49,8 +49,8 @@ router.post('/playnext',function(req,res,next){
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,function(res){
-			      	console.log('done')
-			      	
+			      	console.log('ok')
+			      	res.send({status:'ok'})
 			      })
 					
 				}
@@ -61,12 +61,12 @@ router.post('/playnext',function(req,res,next){
      	else{
    			fn.sendSocketToSpeaker(req.body.key,function(res){
 		      	console.log('done')
-		      	
+		      	res.send({status:'ok'})
 		      })
 
 
      	}
-   res.send({status:'ok'})
+   
 	
 })
 
