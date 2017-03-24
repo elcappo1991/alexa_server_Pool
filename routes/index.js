@@ -43,7 +43,7 @@ router.post('/playnext',function(req,res,next){
       console.log(req.body.key)	
       if(! req.body.key){
       	fn.clients.forEach(function(soc){
-		if (soc.linked === true){
+		if (soc.linked == true){
 
 			 fn.sendSocketToSpeaker(soc.name,function(res){
 		      	console.log('done')
