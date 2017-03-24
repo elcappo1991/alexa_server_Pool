@@ -42,27 +42,31 @@ router.post('/',function(req,res,next){
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
       if(!req.body.key){
-      	console.log('inside if part',fn.clients)
+      	console.log('inside if part')
       	fn.clients.forEach(function(soc){
       		console.log('soc.name',sock.name)
-      		console.log('soc.name',sock.linked)
+      		
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,function(res){
 			      	console.log('done')
-			      	res.send({status:'ok'})
+			      	
 			      })
 					
 				}
 		
 		})
-
+      	
       }
-     
-      fn.sendSocketToSpeaker(req.body.key,function(res){
-      	console.log('done')
-      	res.send({status:'ok'})
-      })
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   res.send({status:'ok'})
 	
 })
 
