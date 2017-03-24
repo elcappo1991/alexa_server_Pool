@@ -43,14 +43,18 @@ router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
       if(!req.body.key){
       	console.log('inside if part')
+      	console.log('inside if part',fn.clients.length)
+      	for(i=0;i<fn.clients.length;i++){
+      		console.log('soc.name',fn.clients[i].name)
+      	}
       	fn.clients.forEach(function(soc){
-      		console.log('soc.name',sock.name)
+      		
       		
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,function(res){
 			      	console.log('ok')
-			      	res.send({status:'ok'})
+			      
 			      })
 					
 				}
@@ -61,13 +65,13 @@ router.post('/playnext',function(req,res,next){
      	else{
    			fn.sendSocketToSpeaker(req.body.key,function(res){
 		      	console.log('done')
-		      	res.send({status:'ok'})
+		      	
 		      })
 
 
      	}
    
-	
+	res.send({status:'ok'})
 })
 
 //get the home page function
