@@ -7,7 +7,11 @@ var fn=require('../bin/www')
 var io=require('socket.io');
 /* GET home page. */
 router.get('/',function(req, res, next) {
-var tab=['arpegio','living room']
+	var tab=[]
+	fn.clients.forEach(function(soc){
+		tab.push(soc.name)
+	})
+
 res.json({list:tab})
 
 
