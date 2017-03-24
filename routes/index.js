@@ -27,9 +27,12 @@ router.post('/',function(req,res,next){
 		if (soc.name == req.body.key){
 			soc.linked=true
 			res.send('found')
+		}else {
+			soc.linked=false
 		}
 		
 	})
+	
 	res.send('end request')
 
 	
