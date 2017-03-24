@@ -22,15 +22,34 @@ res.json({list:tab})
 
 router.post('/',function(req,res,next){
 	console.log(req.body.key)
-	if (list.indexOf(req.body.key) != -1 ){
-res.send('found')
-	}else {
-		res.send('not found')
-	}
+	
+	fn.clients.forEach(function(soc){
+		if (soc.name == req.body.key){
+			soc.linked=true
+			res.send('found')
+		}
+		
+	})
+	res.send('end request')
+
 	
 })
 router.post('/playnext',function(req,res,next){
       console.log(req.body.key)	
+      if(! req.body.key){
+      	fn.clients.forEach(function(soc){
+		if (soc.linked == true){
+
+			 fn.sendSocketToSpeaker(soc.name,function(res){
+		      	console.log('done')
+		      	res.send({status:'ok'})
+		      })
+					
+		}
+		
+	})
+
+      }
      
       fn.sendSocketToSpeaker(req.body.key,function(res){
       	console.log('done')

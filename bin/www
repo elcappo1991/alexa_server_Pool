@@ -73,6 +73,7 @@ require('net').createServer(function (socket) {
 
     socket.on('data', function (data) {
       socket.name=data.toString()
+      socket.linked=false
 
       clients.push(socket);
       socket.write('connected to server')
