@@ -138,6 +138,7 @@ router.post('/playtrack',function(req,res,next){
 
 router.post('/increasevolume',function(req,res,next){
       console.log('req.body.key',req.body.key)	
+      valtoIncrease=req.body.nb
       if(!req.body.key){
    
       
@@ -146,7 +147,7 @@ router.post('/increasevolume',function(req,res,next){
       		
 			if (soc.linked ==true){
 					
-				 fn.sendSocketToSpeaker(soc.name,'volume_increase',function(res){
+				 fn.sendSocketToSpeaker(soc.name,'volume_increase:'+valtoIncrease,function(res){
 			      	console.log('ok')
 			      
 			      })
@@ -157,7 +158,7 @@ router.post('/increasevolume',function(req,res,next){
       	
       }
      	else{
-   			fn.sendSocketToSpeaker(req.body.key,'volume_increase',function(res){
+   			fn.sendSocketToSpeaker(req.body.key,'volume_increase:'+valtoIncrease,function(res){
 		      	console.log('done')
 		      	
 		      })
@@ -169,6 +170,7 @@ router.post('/increasevolume',function(req,res,next){
 })
 
 router.post('/decreasevolume',function(req,res,next){
+	  valtoDecrease=req.body.nb
       console.log('req.body.key',req.body.key)	
       if(!req.body.key){
    
@@ -178,7 +180,7 @@ router.post('/decreasevolume',function(req,res,next){
       		
 			if (soc.linked ==true){
 					
-				 fn.sendSocketToSpeaker(soc.name,'volume_decrease',function(res){
+				 fn.sendSocketToSpeaker(soc.name,'volume_decrease:'+valtoDecrease,function(res){
 			      	console.log('ok')
 			      
 			      })
@@ -189,7 +191,7 @@ router.post('/decreasevolume',function(req,res,next){
       	
       }
      	else{
-   			fn.sendSocketToSpeaker(req.body.key,'volume_decrease',function(res){
+   			fn.sendSocketToSpeaker(req.body.key,'volume_decrease:'+valtoDecrease,function(res){
 		      	console.log('done')
 		      	
 		      })
