@@ -14,10 +14,7 @@ router.get('/',function(req, res, next) {
 		tab.push(soc.name)
 	})
 
-res.json({list:tab})
-
-
-
+    res.json({list:tab})
 
 });
 
@@ -41,11 +38,7 @@ router.post('/',function(req,res,next){
 	})
 	
 			res.send('not found')
-	
-	
-	
 
-	
 })
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
