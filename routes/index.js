@@ -208,6 +208,39 @@ router.post('/decreasevolume',function(req,res,next){
 })
 
 
+router.post('/pause',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'pause_toggle',function(res){
+			      	console.log('ok')
+			      
+			      })
+					
+				}
+		
+		})
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'pause_toggle',function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   
+	res.send({status:'ok'})
+})
+
+
 
 
 module.exports = router;
