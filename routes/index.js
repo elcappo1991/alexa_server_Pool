@@ -5,6 +5,8 @@ var lockService=require('../services/lockService')
 var list =['living room','arpegio']
 var fn=require('../bin/www')
 var io=require('socket.io');
+
+
 /* GET home page. */
 router.get('/',function(req, res, next) {
 	var tab=[]
@@ -48,17 +50,14 @@ router.post('/',function(req,res,next){
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
       if(!req.body.key){
-      	console.log('inside if part')
-      	console.log('inside if part',fn.clients.length)
-      	for(i=0;i<fn.clients.length;i++){
-      		console.log('soc.name',fn.clients[i].name)
-      	}
+   
+      
       	fn.clients.forEach(function(soc){
       		
       		
 			if (soc.linked ==true){
 					
-				 fn.sendSocketToSpeaker(soc.name,function(res){
+				 fn.sendSocketToSpeaker(soc.name,'play_next',function(res){
 			      	console.log('ok')
 			      
 			      })
@@ -69,7 +68,7 @@ router.post('/playnext',function(req,res,next){
       	
       }
      	else{
-   			fn.sendSocketToSpeaker(req.body.key,function(res){
+   			fn.sendSocketToSpeaker(req.body.key,'play_next',function(res){
 		      	console.log('done')
 		      	
 		      })
@@ -80,7 +79,133 @@ router.post('/playnext',function(req,res,next){
 	res.send({status:'ok'})
 })
 
-//get the home page function
+router.post('/playprevious',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'play_prev',function(res){
+			      	console.log('ok')
+			      
+			      })
+					
+				}
+		
+		})
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'play_prev',function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   
+	res.send({status:'ok'})
+})
+
+router.post('/playtrack',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'play',function(res){
+			      	console.log('ok')
+			      
+			      })
+					
+				}
+		
+		})
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'play',function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   
+	res.send({status:'ok'})
+})
+
+router.post('/increasevolume',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'volume_increase',function(res){
+			      	console.log('ok')
+			      
+			      })
+					
+				}
+		
+		})
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'volume_increase',function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   
+	res.send({status:'ok'})
+})
+
+router.post('/decreasevolume',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'volume_decrease',function(res){
+			      	console.log('ok')
+			      
+			      })
+					
+				}
+		
+		})
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'volume_decrease',function(res){
+		      	console.log('done')
+		      	
+		      })
+
+
+     	}
+   
+	res.send({status:'ok'})
+})
 
 
 

@@ -90,12 +90,12 @@ require('net').createServer(function (socket) {
        }
     });
 
-    var sendSocketToSpeaker=function(name,callback){
+    var sendSocketToSpeaker=function(name,action,callback){
         console.log('inside function')
        
         clients.forEach(function(client){
           if (client.name==name){
-                callback(client.write('play_next'))
+                callback(client.write(action))
               }else {
                callback(false)
             }
