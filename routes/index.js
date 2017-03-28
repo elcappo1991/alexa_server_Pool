@@ -83,7 +83,12 @@ router.post('/playprevious',function(req,res,next){
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,'play_prev',function(res){
-			      	console.log('ok')
+				 	if(res){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
+			      	
 			      
 			      })
 					
@@ -94,14 +99,18 @@ router.post('/playprevious',function(req,res,next){
       }
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play_prev',function(res){
-		      	console.log('done')
+		       	if(res){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
 		      	
 		      })
 
 
      	}
    
-	res.send({status:'ok'})
+	
 })
 
 router.post('/playtrack',function(req,res,next){
