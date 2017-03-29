@@ -73,13 +73,14 @@ router.post('/playnext',function(req,res,next){
 					
 				 fn.sendSocketToSpeaker(soc.name,'play_next',function(result){
 				 	console.log('the result from bin/www is ',result)
-			      	if(result != false ){
+
+			      	if(result == 'done' ){
 			      		console.log('if result is true')
-				 	 res.send({status:'ok'})	
-				 }else{
-				 	console.log('if result is false')
-				 	 res.send({status:'no'})	
-				 }
+				 	 	res.send({status:'ok'})	
+				 	}else{
+				 		console.log('if result is false')
+				 		 res.send({status:'no'})	
+					 }
 			      	
 			      
 			      })
@@ -100,7 +101,7 @@ router.post('/playnext',function(req,res,next){
       }
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play_next',function(result){
-		      	if(result != false ){
+		      	if(result == 'done' ){
 		      		console.log('if result is true')
 				 	 res.send({status:'ok'})	
 				 }else{

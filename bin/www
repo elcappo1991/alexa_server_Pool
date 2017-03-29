@@ -96,9 +96,10 @@ require('net').createServer(function (socket) {
         clients.forEach(function(client){
           if (client.name==name){
                 console.log('bin/www result ',client.write(action))
-                callback(client.write(action))
+                client.write(action)
+                callback('done')
               }else {
-               callback(false)
+               callback('not done')
             }
 
             })
