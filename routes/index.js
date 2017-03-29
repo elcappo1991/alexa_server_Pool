@@ -61,6 +61,7 @@ router.post('/',function(req,res,next){
 })
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
+      ctr=0
       if(!req.body.key){
    
       
@@ -82,8 +83,12 @@ router.post('/playnext',function(req,res,next){
 				}
 		
 		})
+		ctr++; 
+         if (ctr === fn.clients.length) {
+          res.send({status:'no'})	
+         }
 		
-		res.send({status:'no'})	
+		
 				 
 			      	
       	
