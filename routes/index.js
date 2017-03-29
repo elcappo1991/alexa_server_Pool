@@ -61,24 +61,26 @@ router.post('/',function(req,res,next){
 })
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
-      ctr=0
+     
       if(!req.body.key){
    
       
       	fn.clients.forEach(function(soc){
-      		ctr++; 
-      		console.log('inside foreaach ctr position 1 ',ctr )
+      		
+
       		
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,'play_next',function(result){
-				 	console.log('the result from bin/www is ',result)
+				 	
+
 
 			      	if(result != false ){
-			      		console.log('if result is true')
+			      		
+
 				 	 	res.send({status:'ok'})	
 				 	}else{
-				 		console.log('if result is false')
+				 		
 				 		 res.send({status:'no'})	
 					 }
 			      	
@@ -89,11 +91,7 @@ router.post('/playnext',function(req,res,next){
 		
 		})
 		
-         if (ctr == fn.clients.length) {
-         	console.log('inside if ctr position 2')
-          res.send({status:'no'})	
-         }
-		
+   
 		
 				 
 			      	
@@ -102,10 +100,10 @@ router.post('/playnext',function(req,res,next){
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play_next',function(result){
 		      	if(result != false ){
-		      		console.log('if result is true')
+		      		
 				 	 res.send({status:'ok'})	
 				 }else{
-				 	console.log('if result is false')
+				 	
 				 	 res.send({status:'no'})	
 				 }
 			      	
@@ -145,8 +143,7 @@ router.post('/playprevious',function(req,res,next){
 				}
 		
 		})
-		res.send({status:'no'})	
-		res.end()
+	
       	
       }
      	else{
@@ -189,7 +186,7 @@ router.post('/playtrack',function(req,res,next){
 				}
 		
 		})
-      res.send({status:'no'})	
+      	
       }
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play',function(result){
@@ -232,7 +229,7 @@ router.post('/increasevolume',function(req,res,next){
 				}
 		
 		})
-		res.send({status:'no'})	
+	
       	
       }
      	else{
@@ -276,7 +273,7 @@ router.post('/decreasevolume',function(req,res,next){
 				}
 		
 		})
-      res.send({status:'no'})	
+      
       }
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'volume_decrease:'+valtoDecrease,function(result){
@@ -319,7 +316,7 @@ router.post('/pause',function(req,res,next){
 				}
 		
 		})
-      	res.send({status:'no'})	
+      
       
       }
      	else{
