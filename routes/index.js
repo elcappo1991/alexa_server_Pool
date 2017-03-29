@@ -21,11 +21,12 @@ router.get('/',function(req, res, next) {
 
 router.post('/',function(req,res,next){
 	console.log(req.body.key)
-	
+	i=0
 	fn.clients.forEach(function(soc){
 		if (soc.name == req.body.key){
 			console.log('theire is a socket named as requested',soc.name)
 			soc.linked=true
+			i=1
 			
 			
 
@@ -37,8 +38,13 @@ router.post('/',function(req,res,next){
 		}
 		
 	})
+	if (i==0){
+      res.send('not found')
+	}else {
+		return res.send('found')
+	}
 	
-		res.send('Linked')
+			
 
 })
 router.post('/playnext',function(req,res,next){
