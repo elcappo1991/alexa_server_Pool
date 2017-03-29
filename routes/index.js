@@ -40,7 +40,7 @@ router.post('/',function(req,res,next){
 
 
 
-		 asynchronous(function(data){
+		 
          ctr++; 
          if (ctr === fn.clients.length) {
             if (i==0){
@@ -50,7 +50,7 @@ router.post('/',function(req,res,next){
 				}
 	
          }
-   				 })
+   				 
 		
 
 
