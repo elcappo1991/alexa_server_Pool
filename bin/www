@@ -94,16 +94,14 @@ require('net').createServer(function (socket) {
         
        
         clients.forEach(function(client){
+
           if (client.name==name){
                 console.log('bin/www result ',client.write(action))
-                client.write(action)
-                callback('done')
-              }else {
-               callback('not done')
-            }
+                callback(client.write(action))
+              }
 
             })
-
+        
     }
 exports.sendSocketToSpeaker=sendSocketToSpeaker;
 
