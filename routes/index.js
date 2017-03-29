@@ -66,7 +66,7 @@ router.post('/playnext',function(req,res,next){
    
       
       	fn.clients.forEach(function(soc){
-      		
+      		ctr++; 
       		
 			if (soc.linked ==true){
 					
@@ -83,7 +83,7 @@ router.post('/playnext',function(req,res,next){
 				}
 		
 		})
-		ctr++; 
+		
          if (ctr === fn.clients.length) {
           res.send({status:'no'})	
          }
