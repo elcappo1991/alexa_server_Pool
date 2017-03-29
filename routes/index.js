@@ -21,6 +21,7 @@ router.get('/',function(req, res, next) {
 
 router.post('/',function(req,res,next){
 	console.log(req.body.key)
+	ctr=0
 	i=0
 	fn.clients.forEach(function(soc){
 		if (soc.name == req.body.key){
@@ -36,13 +37,24 @@ router.post('/',function(req,res,next){
 
 			soc.linked=false
 		}
+
+
+
+		 asynchronous(function(data){
+         ctr++; 
+         if (ctr === fn.clients.length) {
+            if (i==0){
+			      res.send('not found')
+				}else {
+					return res.send('found')
+				}
+	
+         }
+   				 })
 		
+
+
 	})
-	if (i==0){
-      res.send('not found')
-	}else {
-		return res.send('found')
-	}
 	
 			
 
