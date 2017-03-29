@@ -67,14 +67,15 @@ router.post('/playnext',function(req,res,next){
       
       	fn.clients.forEach(function(soc){
       		ctr++; 
+      		console.log('inside foreaach ctr position 1 ',ctr )
       		
 			if (soc.linked ==true){
 					
 				 fn.sendSocketToSpeaker(soc.name,'play_next',function(result){
 			      	if(result != false ){
-				 	res.send({status:'ok'})	
+				 	return res.send({status:'ok'})	
 				 }else{
-				 	res.send({status:'no'})	
+				 	return res.send({status:'no'})	
 				 }
 			      	
 			      
@@ -84,7 +85,8 @@ router.post('/playnext',function(req,res,next){
 		
 		})
 		
-         if (ctr === fn.clients.length) {
+         if (ctr == fn.clients.length) {
+         	console.log('inside if ctr position 2')
           res.send({status:'no'})	
          }
 		
@@ -96,9 +98,9 @@ router.post('/playnext',function(req,res,next){
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play_next',function(result){
 		      	if(result != false ){
-				 	res.send({status:'ok'})	
+				 	return res.send({status:'ok'})	
 				 }else{
-				 	res.send({status:'no'})	
+				 	return res.send({status:'no'})	
 				 }
 			      	
 		      	
