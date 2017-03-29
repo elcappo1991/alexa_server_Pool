@@ -26,9 +26,9 @@ router.post('/',function(req,res,next){
 		if (soc.name == req.body.key){
 			console.log('theire is a socket named as requested',soc.name)
 			soc.linked=true
-			res.send('found')
-			res.end()
-			return
+			return res.send('found')
+			
+
 
 			
 		}else {
