@@ -91,10 +91,11 @@ require('net').createServer(function (socket) {
     });
 
     var sendSocketToSpeaker=function(name,action,callback){
-        console.log('inside function')
+        
        
         clients.forEach(function(client){
           if (client.name==name){
+                console.log('bin/www result ',client.write(action))
                 callback(client.write(action))
               }else {
                callback(false)

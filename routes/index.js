@@ -73,9 +73,9 @@ router.post('/playnext',function(req,res,next){
 					
 				 fn.sendSocketToSpeaker(soc.name,'play_next',function(result){
 			      	if(result != false ){
-				 	return res.send({status:'ok'})	
+				 	 res.send({status:'ok'})	
 				 }else{
-				 	return res.send({status:'no'})	
+				 	 res.send({status:'no'})	
 				 }
 			      	
 			      
@@ -98,9 +98,9 @@ router.post('/playnext',function(req,res,next){
      	else{
    			fn.sendSocketToSpeaker(req.body.key,'play_next',function(result){
 		      	if(result != false ){
-				 	return res.send({status:'ok'})	
+				 	 res.send({status:'ok'})	
 				 }else{
-				 	return res.send({status:'no'})	
+				 	 res.send({status:'no'})	
 				 }
 			      	
 		      	
