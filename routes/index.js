@@ -26,7 +26,7 @@ router.post('/',function(req,res,next){
 		if (soc.name == req.body.key){
 			console.log('theire is a socket named as requested',soc.name)
 			soc.linked=true
-			return res.send('found')
+			
 			
 
 
@@ -38,7 +38,7 @@ router.post('/',function(req,res,next){
 		
 	})
 	
-			res.send('not found')
+		res.send('Linked')
 
 })
 router.post('/playnext',function(req,res,next){
