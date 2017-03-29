@@ -101,8 +101,11 @@ router.post('/playprevious',function(req,res,next){
 				 	console.log(result)
 				 	if(result != false ){
 				 	res.send({status:'ok'})	
+				 	res.end()
+
 				 	}else{
-				 	res.send({status:'no'})	
+				 	res.send({status:'no'})
+				 	res.end()	
 				 	}
 			      	
 			      
@@ -112,6 +115,7 @@ router.post('/playprevious',function(req,res,next){
 		
 		})
 		res.send({status:'no'})	
+		res.end()
       	
       }
      	else{
