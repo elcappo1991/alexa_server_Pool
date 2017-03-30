@@ -249,6 +249,49 @@ router.post('/increasevolume',function(req,res,next){
 	
 })
 
+router.post('/incrvolume',function(req,res,next){
+      console.log('req.body.key',req.body.key)	
+     
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'volume_increase',function(result){
+			      	if(result != false ){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
+			      	
+			      
+			      })
+					
+				}
+		
+		})
+	res.send({status:'no'})	
+      	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'volume_increase',function(result){
+		      	if(result != false ){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
+			      	
+		      	
+		      })
+
+
+     	}
+   
+	
+})
 router.post('/decreasevolume',function(req,res,next){
 	  valtoDecrease=req.body.nb
       console.log('req.body.key',req.body.key)	
@@ -291,6 +334,51 @@ router.post('/decreasevolume',function(req,res,next){
    
 	
 })
+
+
+router.post('/decrevolume',function(req,res,next){
+	  
+      console.log('req.body.key',req.body.key)	
+      if(!req.body.key){
+   
+      
+      	fn.clients.forEach(function(soc){
+      		
+      		
+			if (soc.linked ==true){
+					
+				 fn.sendSocketToSpeaker(soc.name,'volume_decrease',function(result){
+			      	if(result != false ){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
+			      	
+			      
+			      })
+					
+				}
+		
+		})
+      res.send({status:'no'})	
+      }
+     	else{
+   			fn.sendSocketToSpeaker(req.body.key,'volume_decrease',function(result){
+		     if(result != false ){
+				 	res.send({status:'ok'})	
+				 }else{
+				 	res.send({status:'no'})	
+				 }
+			      	
+		      	
+		      })
+
+
+     	}
+   
+	
+})
+
 
 
 router.post('/pause',function(req,res,next){
