@@ -91,7 +91,7 @@ router.post('/playnext',function(req,res,next){
 		
 		})
 		
-   
+   		 res.send({status:'no'})	
 		
 				 
 			      	
