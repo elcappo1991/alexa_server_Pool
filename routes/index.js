@@ -59,6 +59,17 @@ router.post('/',function(req,res,next){
 			
 
 })
+
+
+router.post('/linktoanyone',function(req,res,next){
+	console.log(req.body.key)
+	
+	fn.clients[0].linked=true
+	res.send(fn.clients[0].name)
+			
+
+})
+
 router.post('/playnext',function(req,res,next){
       console.log('req.body.key',req.body.key)	
      
