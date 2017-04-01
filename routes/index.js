@@ -60,6 +60,22 @@ router.post('/',function(req,res,next){
 
 })
 
+router.get('/getConnectedDevice',function(req,res,next){
+	var i=0
+	fn.clients.forEach(function(soc){
+		if(soc.linked==true){
+			i=1
+			res.send(soc.name)
+		}
+	})
+
+
+	if (i=0){
+		res.send(false)
+	}
+
+
+})
 
 router.post('/linktoanyone',function(req,res,next){
 	console.log(req.body.key)
