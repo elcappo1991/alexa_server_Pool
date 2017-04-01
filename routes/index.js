@@ -70,7 +70,7 @@ router.get('/getConnectedDevice',function(req,res,next){
 	})
 
 
-	if (i=0){
+	if (i==0){
 		res.send(false)
 	}
 
