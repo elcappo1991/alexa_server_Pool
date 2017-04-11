@@ -7,7 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('MobileAcces:server');
 var http = require('http');
-var models =require('../models')
+var models = require('../models')
 
 
 
@@ -65,57 +65,64 @@ io.sockets.on('connection',function(socket){
 */
 
 
-var clients=[]
-require('net').createServer(function (socket) {
+var clients = []
+require('net').createServer(function(socket) {
     console.log("connected");
-    
 
+    socket.setTimeout(10000);
 
-    socket.on('data', function (data) {
-      socket.name=data.toString()
-      socket.linked=false
+    socket.on('data', function(data) {
+        socket.name = data.toString()
+        socket.linked = false
 
-      clients.push(socket);
-      socket.write('connected to server')
-        console.log(data.toString()); 
+        clients.push(socket);
+        socket.write('connected to server')
+        console.log(data.toString());
     });
 
-
-
-    socket.on('close',function(){
+    socket.on('timeout', function() {
+        log.info('SOCKET TIMEOUT');
         var index = clients.indexOf(socket);
-        if(index != -1 ){
-        clients.splice(index,1);
-        console.log('client close');
-       }
+        if (index != -1) {
+            clients.splice(index, 1);
+            console.log('client close');
+        }
     });
 
-    var sendSocketToSpeaker=function(name,action,callback){
-        
-       
-        clients.forEach(function(client){
+    socket.on('close', function() {
+        var index = clients.indexOf(socket);
+        if (index != -1) {
+            clients.splice(index, 1);
+            console.log('client close');
+        }
+    });
 
-          if (client.name==name){
-                
+    var sendSocketToSpeaker = function(name, action, callback) {
+
+
+        clients.forEach(function(client) {
+
+            if (client.name == name) {
+
                 callback(client.write(action))
-              }
+            }
 
-            })
-        
+        })
+
     }
-exports.sendSocketToSpeaker=sendSocketToSpeaker;
+    exports.sendSocketToSpeaker = sendSocketToSpeaker;
 
-    
 
-}).listen(7070,function(){
 
-  console.log('listen on port 7070')
+}).listen(7070, function() {
+
+    console.log('listen on port 7070')
 });
 
 
 
 
-    /* setInterval(function(){
+/* setInterval(function(){
  
 
 var randomClient;
@@ -134,19 +141,19 @@ exports.clients = clients;
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+    var port = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
 
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+    if (port >= 0) {
+        // port number
+        return port;
+    }
 
-  return false;
+    return false;
 }
 
 /**
@@ -154,27 +161,27 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+    var bind = typeof port === 'string' ?
+        'Pipe ' + port :
+        'Port ' + port;
 
-  // handle specific listen errors with friendly messages
-  switch (error.code) {
-    case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
-      process.exit(1);
-      break;
-    case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
-      process.exit(1);
-      break;
-    default:
-      throw error;
-  }
+    // handle specific listen errors with friendly messages
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
 }
 
 /**
@@ -182,10 +189,10 @@ function onError(error) {
  */
 
 function onListening() {
-  var addr = server.address();
-  console.log('server http listening on 5050')
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+    var addr = server.address();
+    console.log('server http listening on 5050')
+    var bind = typeof addr === 'string' ?
+        'pipe ' + addr :
+        'port ' + addr.port;
+    debug('Listening on ' + bind);
 }
