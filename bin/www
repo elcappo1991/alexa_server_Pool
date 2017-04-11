@@ -81,7 +81,7 @@ require('net').createServer(function(socket) {
     });
 
     socket.on('timeout', function() {
-        log.info('SOCKET TIMEOUT');
+        console.log('SOCKET TIMEOUT');
         var index = clients.indexOf(socket);
         if (index != -1) {
             clients.splice(index, 1);
