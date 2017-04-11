@@ -21,6 +21,7 @@
     "moment-timezone": "~0.5.2",
     "morgan": "~1.7.0",
     "mysql": "latest",
+    "net-keepalive": "^0.4.1",
     "node-rsa": "latest",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

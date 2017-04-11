@@ -63,13 +63,15 @@ io.sockets.on('connection',function(socket){
 })
 
 */
-
+var NetKeepAlive = require('net-keepalive')
 
 var clients = []
 require('net').createServer(function(socket) {
     console.log("connected");
 
     socket.setKeepAlive(true, 10000)
+    NetKeepAlive.setKeepAliveInterval(socket, 1000)
+    NetKeepAlive.setKeepAliveProbes(socket, 1)
 
 
     socket.on('data', function(data) {
