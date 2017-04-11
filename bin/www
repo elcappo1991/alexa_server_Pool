@@ -81,6 +81,16 @@ require('net').createServer(function(socket) {
         console.log(data.toString());
     });
 
+    socket.on('error', function(e) {
+        if (e.code == 'ETIMEDOUT') {
+            var index = clients.indexOf(socket);
+            if (index != -1) {
+                clients.splice(index, 1);
+                console.log('client close');
+            }
+
+        }
+    })
 
     socket.on('close', function() {
         var index = clients.indexOf(socket);
