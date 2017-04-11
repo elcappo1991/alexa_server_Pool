@@ -68,8 +68,9 @@ io.sockets.on('connection',function(socket){
 var clients = []
 require('net').createServer(function(socket) {
     console.log("connected");
-    socket.setKeepAlive(true);
-    socket.setTimeout(10000);
+
+    socket.setKeepAlive(true, 10000)
+
 
     socket.on('data', function(data) {
         socket.name = data.toString()
@@ -80,14 +81,6 @@ require('net').createServer(function(socket) {
         console.log(data.toString());
     });
 
-    socket.on('timeout', function() {
-        console.log('SOCKET TIMEOUT');
-        var index = clients.indexOf(socket);
-        if (index != -1) {
-            clients.splice(index, 1);
-            console.log('client close');
-        }
-    });
 
     socket.on('close', function() {
         var index = clients.indexOf(socket);
