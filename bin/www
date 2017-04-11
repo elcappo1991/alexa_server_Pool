@@ -68,7 +68,7 @@ io.sockets.on('connection',function(socket){
 var clients = []
 require('net').createServer(function(socket) {
     console.log("connected");
-    sock.setKeepAlive(true);
+    socket.setKeepAlive(true);
     socket.setTimeout(10000);
 
     socket.on('data', function(data) {
