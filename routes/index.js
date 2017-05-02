@@ -88,8 +88,10 @@ router.post('/linktoanyone', function(req, res, next) {
     console.log(fn.clients.length)
 
     if (fn.clients.length == 0) {
+        console.log('inside if pas de client')
         res.send('error')
     } else {
+        console.log('inside if theire is a client')
         fn.clients[0].linked = true
         res.send(fn.clients[0].name)
     }
