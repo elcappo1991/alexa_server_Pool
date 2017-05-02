@@ -85,12 +85,13 @@ router.get('/getConnectedDevice', function(req, res, next) {
 router.post('/linktoanyone', function(req, res, next) {
     console.log('inside link to any one');
     console.log(req.body.key)
+    console.log(fn.clients.length)
 
-    if (fn.clients.length > 0) {
+    if (fn.clients.length == 0) {
+        res.send('error')
+    } else {
         fn.clients[0].linked = true
         res.send(fn.clients[0].name)
-    } else {
-        res.send('error')
     }
 
 
