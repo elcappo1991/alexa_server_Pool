@@ -86,7 +86,7 @@ router.post('/linktoanyone', function(req, res, next) {
     console.log('inside link to any one');
     console.log(req.body.key)
 
-    if (fn.clients.length > 0 && fn.clients) {
+    if (fn.clients.length > 0) {
         fn.clients[0].linked = true
         res.send(fn.clients[0].name)
     } else {
