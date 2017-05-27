@@ -107,7 +107,8 @@ router.post('/playnext', function(req, res, next) {
     if (!req.body.key) {
 
 
-        fn.clients.forEach(function(soc) {
+        fn.clients.forEach(function(soc) { // browse all speaker connected
+
 
 
 
