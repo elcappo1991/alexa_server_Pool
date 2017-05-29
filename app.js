@@ -99,7 +99,7 @@ app.use(function(req, res, next) {
 app.use(function(req, res, next) {
 
     res.locals.user = null;
-    res.send('error');
+    res.send('error  ');
 
 });
 
@@ -109,10 +109,11 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
+        console.log('error log ', err)
         res.status(err.status || 500);
 
         res.locals.user = null;
-        res.send('error');
+        res.send('error erreur');
     });
 }
 

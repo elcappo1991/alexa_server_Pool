@@ -103,7 +103,11 @@ require('net').createServer(function(socket) {
     });
 
     var sendSocketToSpeaker = function(name, action, callback) {
+        console.log('zsgezeg', action)
+        if (clients.length == 0) {
 
+            callback(false)
+        }
 
         clients.forEach(function(client) {
 
@@ -115,15 +119,15 @@ require('net').createServer(function(socket) {
         })
 
     }
-    exports.sendSocketToSpeaker = sendSocketToSpeaker;
 
+
+    exports.sendSocketToSpeaker = sendSocketToSpeaker;
 
 
 }).listen(7070, function() {
 
     console.log('listen on port 7070')
 });
-
 
 
 

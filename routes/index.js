@@ -141,19 +141,23 @@ router.post('/playnext', securityCheck, function(req, res, next) {
 
 
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'play_next', function(result) {
-            if (result != false) {
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'play_next', function(result) {
+                if (result != false) {
 
-                res.send({ status: 'ok' })
-            } else {
+                    res.send({ status: 'ok' })
+                } else {
 
-                res.send({ status: 'no' })
-            }
-
-
-        })
+                    res.send({ status: 'no' })
+                }
 
 
+            })
+
+
+        }
     }
 
 
@@ -189,17 +193,21 @@ router.post('/playprevious', securityCheck, function(req, res, next) {
         res.send({ status: 'no' })
 
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'play_prev', function(result) {
-            console.log(result)
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'play_prev', function(result) {
+                console.log(result)
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
-        })
+            })
 
 
+        }
     }
 
 
@@ -230,17 +238,21 @@ router.post('/playtrack', securityCheck, function(req, res, next) {
         })
         res.send({ status: 'no' })
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'play', function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'play', function(result) {
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
 
-        })
+            })
 
 
+        }
     }
 
 
@@ -273,24 +285,29 @@ router.post('/increasevolume', securityCheck, function(req, res, next) {
         res.send({ status: 'no' })
 
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'volume_increase:' + valtoIncrease, function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'volume_increase:' + valtoIncrease, function(result) {
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
 
-        })
+            })
 
 
+        }
     }
 
 
 })
 
 router.post('/incrvolume', securityCheck, function(req, res, next) {
-    console.log('req.body.key', req.body.key)
+
+
 
     if (!req.body.key) {
 
@@ -316,21 +333,35 @@ router.post('/incrvolume', securityCheck, function(req, res, next) {
         res.send({ status: 'no' })
 
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'volume_increase', function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
+
+
+
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            if (fn.clients.length == 0) {
                 res.send({ status: 'no' })
+            } else {
+                fn.sendSocketToSpeaker(req.body.key, 'volume_increase', function(err, result) {
+                    console.log(err)
+                    if (result != false) {
+                        res.send({ status: 'ok' })
+                    } else {
+                        res.send({ status: 'no' })
+                    }
+
+
+                })
             }
+        }
 
-
-        })
 
 
     }
 
 
 })
+
 router.post('/decreasevolume', securityCheck, function(req, res, next) {
     valtoDecrease = req.body.nb
     console.log('req.body.key', req.body.key)
@@ -357,17 +388,20 @@ router.post('/decreasevolume', securityCheck, function(req, res, next) {
         })
         res.send({ status: 'no' })
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'volume_decrease:' + valtoDecrease, function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'volume_decrease:' + valtoDecrease, function(result) {
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
 
-        })
+            })
 
-
+        }
     }
 
 
@@ -400,22 +434,24 @@ router.post('/decrevolume', securityCheck, function(req, res, next) {
         })
         res.send({ status: 'no' })
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'volume_decrease', function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'volume_decrease', function(result) {
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
 
-        })
-
+            })
+        }
 
     }
 
 
 })
-
 
 
 router.post('/pause', securityCheck, function(req, res, next) {
@@ -444,16 +480,19 @@ router.post('/pause', securityCheck, function(req, res, next) {
         res.send({ status: 'no' })
 
     } else {
-        fn.sendSocketToSpeaker(req.body.key, 'pause_toggle', function(result) {
-            if (result != false) {
-                res.send({ status: 'ok' })
-            } else {
-                res.send({ status: 'no' })
-            }
+        if (fn.clients.length == 0) {
+            res.send({ status: 'no' })
+        } else {
+            fn.sendSocketToSpeaker(req.body.key, 'pause_toggle', function(result) {
+                if (result != false) {
+                    res.send({ status: 'ok' })
+                } else {
+                    res.send({ status: 'no' })
+                }
 
 
-        })
-
+            })
+        }
 
     }
 
