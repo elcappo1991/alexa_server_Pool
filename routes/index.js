@@ -8,7 +8,7 @@ var io = require('socket.io');
 
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', securityCheck, function(req, res, next) {
     var tab = []
     fn.clients.forEach(function(soc) {
         tab.push(soc.name)
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', securityCheck, function(req, res, next) {
     console.log('speaker to link ', req.body.key)
     console.log('length of table socktet  ', fn.clients.length)
     ctr = 0
@@ -66,7 +66,7 @@ router.post('/', function(req, res, next) {
 
 })
 
-router.get('/getConnectedDevice', function(req, res, next) {
+router.get('/getConnectedDevice', securityCheck, function(req, res, next) {
     var i = 0
     fn.clients.forEach(function(soc) {
         if (soc.linked == true) {
@@ -83,7 +83,7 @@ router.get('/getConnectedDevice', function(req, res, next) {
 
 })
 
-router.post('/linktoanyone', function(req, res, next) {
+router.post('/linktoanyone', securityCheck, function(req, res, next) {
     console.log('inside link to any one');
     console.log(req.body.key)
     console.log(fn.clients.length)
@@ -102,7 +102,7 @@ router.post('/linktoanyone', function(req, res, next) {
 
 })
 
-router.post('/playnext', function(req, res, next) {
+router.post('/playnext', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
 
     if (!req.body.key) {
@@ -159,7 +159,7 @@ router.post('/playnext', function(req, res, next) {
 
 })
 
-router.post('/playprevious', function(req, res, next) {
+router.post('/playprevious', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
     if (!req.body.key) {
 
@@ -205,7 +205,7 @@ router.post('/playprevious', function(req, res, next) {
 
 })
 
-router.post('/playtrack', function(req, res, next) {
+router.post('/playtrack', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
     if (!req.body.key) {
 
@@ -246,7 +246,7 @@ router.post('/playtrack', function(req, res, next) {
 
 })
 
-router.post('/increasevolume', function(req, res, next) {
+router.post('/increasevolume', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
     valtoIncrease = req.body.nb
     if (!req.body.key) {
@@ -289,7 +289,7 @@ router.post('/increasevolume', function(req, res, next) {
 
 })
 
-router.post('/incrvolume', function(req, res, next) {
+router.post('/incrvolume', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
 
     if (!req.body.key) {
@@ -331,7 +331,7 @@ router.post('/incrvolume', function(req, res, next) {
 
 
 })
-router.post('/decreasevolume', function(req, res, next) {
+router.post('/decreasevolume', securityCheck, function(req, res, next) {
     valtoDecrease = req.body.nb
     console.log('req.body.key', req.body.key)
     if (!req.body.key) {
@@ -374,7 +374,7 @@ router.post('/decreasevolume', function(req, res, next) {
 })
 
 
-router.post('/decrevolume', function(req, res, next) {
+router.post('/decrevolume', securityCheck, function(req, res, next) {
 
     console.log('req.body.key', req.body.key)
     if (!req.body.key) {
@@ -418,7 +418,7 @@ router.post('/decrevolume', function(req, res, next) {
 
 
 
-router.post('/pause', function(req, res, next) {
+router.post('/pause', securityCheck, function(req, res, next) {
     console.log('req.body.key', req.body.key)
     if (!req.body.key) {
 
@@ -462,5 +462,17 @@ router.post('/pause', function(req, res, next) {
 
 
 
+
+function securityCheck(req, response, next) {
+
+    var fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+
+    if (fullUrl == 'http://www.baidu.com/cache/global/img/gs.gif') {
+        response.end()
+    } else {
+        next()
+    }
+}
 
 module.exports = router;
