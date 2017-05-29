@@ -20,7 +20,8 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/', function(req, res, next) {
-    console.log(req.body.key)
+    console.log('speaker to link ', req.body.key)
+    console.log('length of table socktet  ', fn.clients.length)
     ctr = 0
     i = 0
     if (fn.clients.length == 0) {
