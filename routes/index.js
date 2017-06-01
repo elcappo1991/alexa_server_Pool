@@ -66,6 +66,43 @@ router.post('/', securityCheck, function(req, res, next) {
 
 })
 
+
+router.post('/checkIfConnected', securityCheck, function(re, res, next) {
+    var numSerie = req.body.key;
+    var i = 0;
+    fn.clients.forEach(function(soc) {
+
+        if (soc.name == numSerie) {
+            i = 1
+            res.send(true)
+        }
+    })
+    if (i == 0) {
+        res.send(false)
+    }
+
+
+
+})
+
+router.post('/checkIfSelected', securityCheck, function(re, res, next) {
+    var numSerie = req.body.key;
+    var i = 0;
+    fn.clients.forEach(function(soc) {
+
+        if (soc.name == numSerie && soc.linked == true) {
+            i = 1
+            res.send(true)
+        }
+    })
+    if (i == 0) {
+        res.send(false)
+    }
+
+
+
+})
+
 router.get('/getConnectedDevice', securityCheck, function(req, res, next) {
     var i = 0
     fn.clients.forEach(function(soc) {
